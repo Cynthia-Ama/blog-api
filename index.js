@@ -5,6 +5,8 @@ const connectdb = require('./connect')
 const cookieparser = require("cookie-parser")
 const cors = require("cors")
 const multer = require("multer")
+const dotenv = require("dotenv")
+dotenv.config()
 
 const AuthRoutes = require('./routes/Auth')
 const PostRoutes = require('./routes/Post')
@@ -42,7 +44,7 @@ app.post("/api/upload", upload.single("file"), function (req, res, err, next){
     next()
 })
 
-const port = 8000
+const port = process.env.PORT || 4000
 const start = async() =>{
     try {
         await connectdb(process.env.MONGO_URI)
